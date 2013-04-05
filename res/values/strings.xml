@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">test2</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_auth">QQ Ayth</string>
+    <string name="fans_list">Fans List</string>
+	<string name="add_twitter">Add Twitter</string>
+</resources>
