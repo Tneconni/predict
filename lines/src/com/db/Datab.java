@@ -14,7 +14,8 @@ public class Datab {
 	private SQLiteDatabase sqldb;
 	
 	private static int version = 1;//数据库版本号	  
-	private static String myDBName = "touch";
+	private static int newVersion = 2;
+	private static String myDBName = "touchs";
 	private static mydbHelper mHelper;
 	private SQLiteDatabase mDb;
 	private final Context mctx;
@@ -40,7 +41,7 @@ public class Datab {
 	public static class mydbHelper extends SQLiteOpenHelper{
 
 		public mydbHelper(Context context) {
-			super(context, myDBName, null, version);
+			super(context, myDBName, null, newVersion);
 			
 			// TODO Auto-generated constructor stub
 		}
@@ -89,7 +90,7 @@ public class Datab {
 
 		mHelper = new mydbHelper(mctx);
 		sqldb = mHelper.getWritableDatabase();
-		
+//		mHelper.onUpgrade(sqldb,version,newVersion);  
 	}
 
 	public void close(){

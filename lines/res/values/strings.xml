@@ -7,4 +7,8 @@
     <string name="title_activity_auth">QQ Ayth</string>
     <string name="fans_list">Fans List</string>
 	<string name="add_twitter">Add Twitter</string>
+	
+	<string name="add_note">Add note</string>
+	<string name="add_person">Add person</string>
+	<string name="add_group">Add group</string>
 </resources>

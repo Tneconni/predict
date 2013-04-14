@@ -151,13 +151,22 @@ public class MainActivity extends Activity {
 		db.open();
 		
 		Cursor c = db.select("note", new String[]{"title", "content"});
-		
+		Cursor c_body = db.select("body", new String[]{"name", "age"});
+		Cursor c_group = db.select("body_group", new String[]{"group_name", "group_type"});
 		List<String> list = new ArrayList<String>();
 		while(c.moveToNext()){
 			list.add(c.getString(0) +"::"+ c.getString(1));
 			
 		}
 		
+		while(c_body.moveToNext()){
+			list.add(c_body.getString(0) +"::"+ c_body.getString(1));
+			
+		}
+		while(c_group.moveToNext()){
+			list.add(c_group.getString(0) +"::"+ c_group.getString(1));
+			
+		}
 		
 		ArrayAdapter adapter = new ArrayAdapter(MainActivity.this,R.layout.data,list);
 		
@@ -169,7 +178,7 @@ public class MainActivity extends Activity {
 	@Override
 	 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-		ApiFamily.mTencent.onActivityResult(requestCode, resultCode, data) ;
+		ApiFamily.mTencent.onActivityResult(requestCode, resultCode, data);
 
 	 }
 	

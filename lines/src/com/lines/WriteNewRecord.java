@@ -22,7 +22,6 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.app.Dialog;
-import android.view.LayoutInflater;
 
 public class WriteNewRecord extends Activity {
 	private Datab db;
@@ -36,7 +35,9 @@ public class WriteNewRecord extends Activity {
 	private Button addGroup;
 	
 	private AlertDialog.Builder builder;
+
 	private AlertDialog dialog;
+	private int clickSign = 0;
 	
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -76,6 +77,8 @@ public class WriteNewRecord extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				clickSign = 1;
+				dialog.setTitle("asd");
 				dialog.show();
 			}
 			
@@ -85,7 +88,9 @@ public class WriteNewRecord extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
+				dialog.setTitle("qwe");
+				clickSign = 2;
+				dialog.show();
 			}
 			
 		});
@@ -94,7 +99,9 @@ public class WriteNewRecord extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
+				dialog.setTitle("zxc");
+				clickSign = 3;
+				dialog.show();
 			}
 			
 		});
@@ -108,30 +115,52 @@ public class WriteNewRecord extends Activity {
 	
 	private void initBuilder(){
 		builder = new Builder(WriteNewRecord.this);
-
 		LayoutInflater factory = LayoutInflater.from(this);  
 	    final View textEntryView = factory.inflate(R.layout.edit_twitter, null);  
 //	    builder.setIcon(R.drawable.icon);  
-	    builder.setTitle("please write your twitter");  
+	    builder.setTitle("please add new person");  
 	    builder.setView(textEntryView);  
 	    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 	    	
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				String table = "note";
+				String[] insertKey;
+				String[] insertValue;
+				EditText edit = (EditText)textEntryView.findViewById(R.id.edit_single_twitter);
+				String value = edit.getText().toString();
 
+				if(clickSign == 1){
+
+					insertKey = new String[]{"content","title"};
+					insertValue = new String[]{value,"default"};
+				}else if(clickSign == 2){
+					table = "body";
+
+					insertKey = new String[]{"name","age"};
+					insertValue = new String[]{value,"24"};
+				}else{
+					table = "body_group";
+
+					insertKey = new String[]{"group_name","group_type"};
+					insertValue = new String[]{value,"default"};
+				}
+				db.open();
+				db.insert(table, insertKey, insertValue);
+				db.close();
+
+			}
+	    });  
+	  
+	    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
 				
 			}
-	    });  
-	  
-	    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {  
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
-				
-			}  
 	    });
-	    
+
 	    dialog = builder.create();
 	}
 
